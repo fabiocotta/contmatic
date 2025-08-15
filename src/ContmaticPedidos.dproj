@@ -127,6 +127,20 @@
             <Form>frmPedidos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="controller\controller.pedido.pas"/>
+        <DCCReference Include="entidade\pedido.entidade.pas"/>
+        <DCCReference Include="util\util.conexao.pas"/>
+        <DCCReference Include="util\util.enumerados.pas"/>
+        <DCCReference Include="model\pedido.repositorio.pas"/>
+        <DCCReference Include="entidade\cliente.entidade.pas"/>
+        <DCCReference Include="entidade\pedidoproduto.entidade.pas"/>
+        <DCCReference Include="entidade\produto.entidade.pas"/>
+        <DCCReference Include="controller\controller.cliente.pas"/>
+        <DCCReference Include="controller\controller.produto.pas"/>
+        <DCCReference Include="controller\controller.pedidoproduto.pas"/>
+        <DCCReference Include="model\cliente.repositorio.pas"/>
+        <DCCReference Include="model\produto.repositorio.pas"/>
+        <DCCReference Include="model\pedidoproduto.repositorio.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

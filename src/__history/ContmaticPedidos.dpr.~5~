@@ -1,0 +1,18 @@
+program ContmaticPedidos;
+
+uses
+  Vcl.Forms,
+  uPedido in 'view\uPedido.pas' {frmPedidos},
+  controller.pedido in 'controller\controller.pedido.pas',
+  pedido.entidade in 'entidade\pedido.entidade.pas',
+  util.conexao in 'util\util.conexao.pas',
+  util.enumerados in 'util\util.enumerados.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPedidos, frmPedidos);
+  Application.Run;
+end.
