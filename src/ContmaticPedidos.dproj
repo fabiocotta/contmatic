@@ -123,7 +123,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="view\uPedido.pas">
+        <DCCReference Include="view\Pedido.pas">
             <Form>frmPedidos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -141,6 +141,22 @@
         <DCCReference Include="model\cliente.repositorio.pas"/>
         <DCCReference Include="model\produto.repositorio.pas"/>
         <DCCReference Include="model\pedidoproduto.repositorio.pas"/>
+        <DCCReference Include="view\PedidoConsulta.pas">
+            <Form>frmPedidoConsulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\ConsultaPadrao.pas">
+            <Form>frmConsultaPadrao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\ConsultaProduto.pas">
+            <Form>frmConsultaProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\ClienteConsulta.pas">
+            <Form>frmClienteConsulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

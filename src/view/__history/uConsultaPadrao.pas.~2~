@@ -1,0 +1,59 @@
+unit uConsultaPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmConsultaPadrao = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    edtNome: TEdit;
+    btPesquisar: TButton;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    btSelcionar: TButton;
+    btCancelar: TButton;
+    DataSource: TDataSource;
+    procedure btPesquisarClick(Sender: TObject);
+  private
+    procedure FormShow(Sender: TObject);
+    { Private declarations }
+  protected
+    FObjeto: TObject;
+    FDataSet: TDataSet;
+    procedure Pesquisar(); virtual; abstract;  protected
+
+  public
+    constructor Create(Sender: TComponent; pObjeto: TObject);
+    { Public declarations }
+  end;
+
+var
+  frmConsultaPadrao: TfrmConsultaPadrao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmConsultaPadrao.btPesquisarClick(Sender: TObject);
+begin
+  Pesquisar;
+end;
+
+constructor TfrmConsultaPadrao.Create(Sender: TComponent; pObjeto: TObject);
+begin
+  Inherited Create(Sender);
+  FObjeto := pObjeto;
+end;
+
+procedure TfrmConsultaPadrao.FormShow(Sender: TObject);
+begin
+  FDataSet := TDataSet.Create(Self);
+end;
+
+end.

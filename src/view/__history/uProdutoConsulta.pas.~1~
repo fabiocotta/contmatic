@@ -1,0 +1,25 @@
+unit uProdutoConsulta;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPadrao, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmConsultaPadrao1 = class(TfrmConsultaPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConsultaPadrao1: TfrmConsultaPadrao1;
+
+implementation
+
+{$R *.dfm}
+
+end.
