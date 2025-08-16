@@ -51,6 +51,7 @@ object frmPedidos: TfrmPedidos
       Color = clBtnFace
       Enabled = False
       TabOrder = 0
+      OnKeyPress = edtClienteCodigoKeyPress
     end
     object dtpDataEmissao: TDateTimePicker
       Left = 100
@@ -67,6 +68,8 @@ object frmPedidos: TfrmPedidos
       Width = 109
       Height = 23
       TabOrder = 3
+      OnExit = edtClienteCodigoExit
+      OnKeyPress = edtClienteCodigoKeyPress
     end
     object btCliente: TButton
       Left = 209
@@ -103,6 +106,7 @@ object frmPedidos: TfrmPedidos
       Height = 25
       Caption = 'Cancelar Pedido'
       TabOrder = 6
+      OnClick = btCancelarPedidoClick
     end
   end
   object pcPedidos: TPageControl
@@ -156,6 +160,8 @@ object frmPedidos: TfrmPedidos
           Width = 70
           Height = 23
           TabOrder = 0
+          OnExit = edtProdutoCodigoExit
+          OnKeyPress = edtClienteCodigoKeyPress
         end
         object btProduto: TButton
           Left = 128
@@ -164,6 +170,7 @@ object frmPedidos: TfrmPedidos
           Height = 25
           Caption = '...'
           TabOrder = 1
+          OnClick = btProdutoClick
         end
         object edtProdutoDescricao: TEdit
           Left = 161
@@ -182,6 +189,7 @@ object frmPedidos: TfrmPedidos
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 3
+          OnKeyPress = edtValorUnitarioKeyPress
         end
         object edtQuantidade: TEdit
           Left = 745
@@ -190,6 +198,7 @@ object frmPedidos: TfrmPedidos
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 4
+          OnKeyPress = edtClienteCodigoKeyPress
         end
         object btAdicionar: TButton
           Left = 810
@@ -201,6 +210,7 @@ object frmPedidos: TfrmPedidos
           DoubleBuffered = True
           ParentDoubleBuffered = False
           TabOrder = 5
+          OnClick = btAdicionarClick
         end
       end
       object DBGrid1: TDBGrid
@@ -209,6 +219,7 @@ object frmPedidos: TfrmPedidos
         Width = 798
         Height = 279
         Align = alClient
+        DataSource = DsPedidoProduto
         ReadOnly = True
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
@@ -216,6 +227,45 @@ object frmPedidos: TfrmPedidos
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        OnDblClick = DBGrid1DblClick
+        OnKeyDown = DBGrid1KeyDown
+        OnKeyPress = DBGrid1KeyPress
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NUMERO_PEDIDO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_PRODUTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCRICAO_PRODUTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QUANTIDADE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_UNITARIO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_TOTAL'
+            Visible = True
+          end>
       end
       object Panel3: TPanel
         Left = 0
@@ -231,6 +281,7 @@ object frmPedidos: TfrmPedidos
           Height = 25
           Caption = 'Gravar Pedido'
           TabOrder = 0
+          OnClick = btGravarPedidoClick
         end
         object btCancelarOperacao: TButton
           Left = 368
@@ -239,6 +290,7 @@ object frmPedidos: TfrmPedidos
           Height = 25
           Caption = 'Cancelar Opera'#231#227'o'
           TabOrder = 1
+          OnClick = btCancelarOperacaoClick
         end
       end
       object Panel4: TPanel
@@ -261,6 +313,7 @@ object frmPedidos: TfrmPedidos
           DoubleBuffered = True
           ParentDoubleBuffered = False
           TabOrder = 0
+          OnClick = btRemoverClick
         end
       end
       object Panel5: TPanel
@@ -291,8 +344,54 @@ object frmPedidos: TfrmPedidos
           Color = clBtnFace
           Enabled = False
           TabOrder = 0
+          OnKeyPress = edtValorUnitarioKeyPress
         end
       end
+    end
+  end
+  object DsPedidoProduto: TDataSource
+    DataSet = CdsPedidoProduto
+    Left = 620
+    Top = 187
+  end
+  object CdsPedidoProduto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterPost = CdsPedidoProdutoAfterPost
+    AfterDelete = CdsPedidoProdutoAfterDelete
+    Left = 620
+    Top = 243
+    object CdsPedidoProdutoCODIGO: TIntegerField
+      DisplayLabel = 'Codigo'
+      FieldName = 'CODIGO'
+      Visible = False
+    end
+    object CdsPedidoProdutoNUMERO_PEDIDO: TIntegerField
+      DisplayLabel = 'Numero pedido'
+      FieldName = 'NUMERO_PEDIDO'
+      Visible = False
+    end
+    object CdsPedidoProdutoCODIGO_PRODUTO: TIntegerField
+      DisplayLabel = 'Codigo produto'
+      FieldName = 'CODIGO_PRODUTO'
+    end
+    object CdsPedidoProdutoDESCRICAO_PRODUTO: TStringField
+      DisplayLabel = 'Descri'#231#227'o produto'
+      DisplayWidth = 50
+      FieldName = 'DESCRICAO_PRODUTO'
+      Size = 100
+    end
+    object CdsPedidoProdutoQUANTIDADE: TIntegerField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'QUANTIDADE'
+    end
+    object CdsPedidoProdutoVALOR_UNITARIO: TCurrencyField
+      DisplayLabel = 'Valor unitario'
+      FieldName = 'VALOR_UNITARIO'
+    end
+    object CdsPedidoProdutoVALOR_TOTAL: TCurrencyField
+      DisplayLabel = 'Valor total'
+      FieldName = 'VALOR_TOTAL'
     end
   end
 end

@@ -30,7 +30,7 @@ begin
       lProdutoRepositorio.Consultar(pDescricao, TConexao.ObterInstancia, pDataSet);
     except
       on e: Exception do
-        raise Exception.Create('Erro ao consultar o produto! Messagem tecnica: '+e.Message);
+        raise Exception.Create('Erro ao consultar o produto!'+e.Message);
     end;
   finally
     FreeAndNil(lProdutoRepositorio);
@@ -48,7 +48,7 @@ begin
       lProdutoRepositorio.ObterProduto(pCodigo, TConexao.ObterInstancia, pCliente);
     except
       on e: Exception do
-        raise Exception.Create('Erro ao obter o produto! Messagem tecnica: '+e.Message);
+        raise Exception.Create('Erro ao obter o produto!'+e.Message);
     end;
   finally
     FreeAndNil(lProdutoRepositorio);

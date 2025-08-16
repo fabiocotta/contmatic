@@ -24,8 +24,6 @@ implementation
 
 { TPedidoRepositorio }
 
-uses controller.pedido, uPedido;
-
 procedure TPedidoRepositorio.Alterar(pPedido: TPedidoEntidade;
   pConexao: TConexao);
 var

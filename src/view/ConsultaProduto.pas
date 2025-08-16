@@ -3,9 +3,23 @@ unit ConsultaProduto;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConsultaPadrao, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, ConsultaPadrao;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Data.DB,
+  Vcl.Grids,
+  ConsultaPadrao,
+  Controller.Produto,
+  Produto.Entidade;
 
 type
   TfrmConsultaProduto = class(TfrmConsultaPadrao)
@@ -34,7 +48,7 @@ begin
     MessageDlg('Não item a ser selecionado!', TMsgDlgType.mtWarning, [mbOK], 0)
   else
   begin
-    TProdutoDominio(FObjeto).PopularObjeto(DataSource.DataSet);
+    TProdutoEntidade(FObjeto).PopularObjeto(DataSource.DataSet);
     ModalResult := mrOk;
   end;
 end;

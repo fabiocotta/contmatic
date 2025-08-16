@@ -2,7 +2,7 @@ program ContmaticPedidos;
 
 uses
   Vcl.Forms,
-  uPedido in 'view\uPedido.pas' {frmPedidos},
+  Pedido in 'view\Pedido.pas' {frmPedidos},
   controller.pedido in 'controller\controller.pedido.pas',
   pedido.entidade in 'entidade\pedido.entidade.pas',
   util.conexao in 'util\util.conexao.pas',
@@ -16,7 +16,11 @@ uses
   controller.pedidoproduto in 'controller\controller.pedidoproduto.pas',
   cliente.repositorio in 'model\cliente.repositorio.pas',
   produto.repositorio in 'model\produto.repositorio.pas',
-  pedidoproduto.repositorio in 'model\pedidoproduto.repositorio.pas';
+  pedidoproduto.repositorio in 'model\pedidoproduto.repositorio.pas',
+  PedidoConsulta in 'view\PedidoConsulta.pas' {frmPedidoConsulta},
+  ConsultaPadrao in 'view\ConsultaPadrao.pas' {frmConsultaPadrao},
+  ConsultaProduto in 'view\ConsultaProduto.pas' {frmConsultaProduto},
+  ClienteConsulta in 'view\ClienteConsulta.pas' {frmClienteConsulta};
 
 {$R *.res}
 
@@ -24,5 +28,9 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPedidos, frmPedidos);
+  Application.CreateForm(TfrmPedidoConsulta, frmPedidoConsulta);
+  Application.CreateForm(TfrmConsultaPadrao, frmConsultaPadrao);
+  Application.CreateForm(TfrmConsultaProduto, frmConsultaProduto);
+  Application.CreateForm(TfrmClienteConsulta, frmClienteConsulta);
   Application.Run;
 end.

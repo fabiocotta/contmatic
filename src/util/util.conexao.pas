@@ -39,10 +39,10 @@ procedure TConexao.carregarConfiguracaoIni;
 var
   lArquivoIni: Tinifile;
 begin
-  if not FileExists(ExtractFilePath(ParamStr(0)) + 'WkConfiguracao.ini') then
+  if not FileExists(ExtractFilePath(ParamStr(0)) + 'Configuracao.ini') then
     raise Exception.Create('Arquivo configuracao.ini não encontrado! Entre em contato com o administrador');
 
-  lArquivoINI := Tinifile.Create(ExtractFilePath(ParamStr(0)) + 'WkConfiguracao.ini');
+  lArquivoINI := Tinifile.Create(ExtractFilePath(ParamStr(0)) + 'Configuracao.ini');
   try
     FDriverID := 'MYSQL';
     FDatabase := lArquivoINI.ReadString('MYSQL', 'Databasem', EmptyStr);

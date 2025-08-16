@@ -63,7 +63,7 @@ begin
       on E : Exception do
       begin
         lConexao.Conexao.Rollback;
-        raise Exception.Create('Erro ao incluir o item do pedido! Messagem tecnica: '+E.Message);
+        raise Exception.Create('Erro ao incluir o item do pedido!'+E.Message);
       end;
     end;
   finally
@@ -83,7 +83,7 @@ begin
         TConexao.ObterInstancia, pListaPedidoProduto);
     except
       on E : Exception do
-        raise Exception.Create('Erro ao obter lista de itens do pedido! Messagem tecnica: '+E.Message);
+        raise Exception.Create('Erro ao obter lista de itens do pedido!'+E.Message);
     end;
   finally
     FreeAndNil(lPedidoProdutoRepositorio);

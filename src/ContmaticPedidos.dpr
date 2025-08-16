@@ -20,7 +20,8 @@ uses
   PedidoConsulta in 'view\PedidoConsulta.pas' {frmPedidoConsulta},
   ConsultaPadrao in 'view\ConsultaPadrao.pas' {frmConsultaPadrao},
   ConsultaProduto in 'view\ConsultaProduto.pas' {frmConsultaProduto},
-  ClienteConsulta in 'view\ClienteConsulta.pas' {frmClienteConsulta};
+  ClienteConsulta in 'view\ClienteConsulta.pas' {frmClienteConsulta},
+  uDataModule in 'util\uDataModule.pas' {DMConexao: TDataModule};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   Application.CreateForm(TfrmConsultaPadrao, frmConsultaPadrao);
   Application.CreateForm(TfrmConsultaProduto, frmConsultaProduto);
   Application.CreateForm(TfrmClienteConsulta, frmClienteConsulta);
+  Application.CreateForm(TDMConexao, DMConexao);
   Application.Run;
 end.

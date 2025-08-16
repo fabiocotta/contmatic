@@ -33,8 +33,8 @@
     <Transaction>2025/08/15 20:16:48.000.824,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
     <Transaction>2025/08/15 20:17:03.000.113,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\model\pedidoproduto.repositorio.pas</Transaction>
     <Transaction>2025/08/15 21:42:39.000.776,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
-    <Transaction>2025/08/15 21:43:27.000.637,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedidoConsulta.dfm</Transaction>
     <Transaction>2025/08/15 21:43:27.000.637,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedidoConsulta.pas</Transaction>
+    <Transaction>2025/08/15 21:43:27.000.637,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedidoConsulta.dfm</Transaction>
     <Transaction>2025/08/15 22:23:36.000.653,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
     <Transaction>2025/08/15 22:24:05.000.625,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaPadrao.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
     <Transaction>2025/08/15 22:24:05.000.625,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaPadrao.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.dfm</Transaction>
@@ -51,13 +51,53 @@
     <Transaction>2025/08/15 22:44:01.000.911,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uClienteConsulta.pas</Transaction>
     <Transaction>2025/08/15 23:08:21.000.082,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uClienteConsulta.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ClienteConsulta.dfm</Transaction>
     <Transaction>2025/08/15 23:08:21.000.081,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uClienteConsulta.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ClienteConsulta.pas</Transaction>
-    <Transaction>2025/08/15 23:08:28.000.093,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaPadrao.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ConsultaPadrao.dfm</Transaction>
     <Transaction>2025/08/15 23:08:28.000.093,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaPadrao.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ConsultaPadrao.pas</Transaction>
+    <Transaction>2025/08/15 23:08:28.000.093,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaPadrao.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ConsultaPadrao.dfm</Transaction>
     <Transaction>2025/08/15 23:08:32.000.333,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaProduto.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ConsultaProduto.pas</Transaction>
     <Transaction>2025/08/15 23:08:32.000.333,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uConsultaProduto.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\ConsultaProduto.dfm</Transaction>
-    <Transaction>2025/08/15 23:08:37.000.350,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedido.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\Pedido.pas</Transaction>
     <Transaction>2025/08/15 23:08:37.000.350,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedido.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\Pedido.dfm</Transaction>
+    <Transaction>2025/08/15 23:08:37.000.350,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedido.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\Pedido.pas</Transaction>
     <Transaction>2025/08/15 23:08:43.000.099,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedidoConsulta.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\PedidoConsulta.dfm</Transaction>
     <Transaction>2025/08/15 23:08:43.000.098,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\uPedidoConsulta.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\view\PedidoConsulta.pas</Transaction>
-  </Transactions>
+    <Transaction>2025/08/16 13:20:01.000.748,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
+    <Transaction>2025/08/16 19:48:10.000.910,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
+    <Transaction>2025/08/16 19:48:47.000.650,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\util\DataModule.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.dfm</Transaction>
+    <Transaction>2025/08/16 19:48:47.000.650,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\util\DataModule.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
+    <Transaction>2025/08/16 19:50:05.000.440,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\util\DataModule.pas=</Transaction>
+    <Transaction>2025/08/16 19:50:23.000.560,=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas</Transaction>
+    <Transaction>2025/08/16 19:50:40.000.404,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.pas=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\util\uDataModule.pas</Transaction>
+    <Transaction>2025/08/16 19:50:40.000.404,C:\Users\fabiocotta\Documents\GitHub\contmatic\src\Unit1.dfm=C:\Users\fabiocotta\Documents\GitHub\contmatic\src\util\uDataModule.dfm</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="controller"/>
+    <File Path="controller\controller.cliente.pas"/>
+    <File Path="controller\controller.pedido.pas"/>
+    <File Path="controller\controller.pedidoproduto.pas"/>
+    <File Path="controller\controller.produto.pas"/>
+    <File Path="entidade"/>
+    <File Path="entidade\cliente.entidade.pas"/>
+    <File Path="entidade\pedido.entidade.pas"/>
+    <File Path="entidade\pedidoproduto.entidade.pas"/>
+    <File Path="entidade\produto.entidade.pas"/>
+    <File Path="model"/>
+    <File Path="model\cliente.repositorio.pas"/>
+    <File Path="model\pedido.repositorio.pas"/>
+    <File Path="model\pedidoproduto.repositorio.pas"/>
+    <File Path="model\produto.repositorio.pas"/>
+    <File Path="util"/>
+    <File Path="util\uDataModule.pas"/>
+    <File Path="util\uDataModule.dfm"/>
+    <File Path="util\util.conexao.pas"/>
+    <File Path="util\util.enumerados.pas"/>
+    <File Path="view"/>
+    <File Path="view\ClienteConsulta.pas"/>
+    <File Path="view\ClienteConsulta.dfm"/>
+    <File Path="view\ConsultaPadrao.pas"/>
+    <File Path="view\ConsultaPadrao.dfm"/>
+    <File Path="view\ConsultaProduto.pas"/>
+    <File Path="view\ConsultaProduto.dfm"/>
+    <File Path="view\Pedido.pas"/>
+    <File Path="view\Pedido.dfm"/>
+    <File Path="view\PedidoConsulta.pas"/>
+    <File Path="view\PedidoConsulta.dfm"/>
+  </ProjectSortOrder>
 </BorlandProject>

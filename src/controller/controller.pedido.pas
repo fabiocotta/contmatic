@@ -3,7 +3,6 @@ unit controller.pedido;
 interface
 
 uses
-
   System.SysUtils,
   pedido.entidade,
   cliente.entidade,
@@ -19,7 +18,7 @@ uses
   util.conexao;
 
 type
-  TControllerPedido = class
+  TPedidoControlador = class
   private
 
   public
@@ -31,22 +30,21 @@ type
 
 implementation
 
-{ TControllerPedido }
+{ TPedidoControlador }
 
-procedure TControllerPedido.Excluir(pNumeroPedido: integer);
+procedure TPedidoControlador.Excluir(pNumeroPedido: integer);
 var
-//  lPedidoProdutoControlador: TPedidoProdutoControlador;
+  lPedidoProdutoControlador: TPedidoProdutoControlador;
   lPedidoRepositorio: TPedidoRepositorio;
   lConexao: TConexao;
 begin
-//  lPedidoProdutoControlador := TPedidoProdutoControlador.Create;
+  lPedidoProdutoControlador := TPedidoProdutoControlador.Create;
   lPedidoRepositorio:= TPedidoRepositorio.Create;
   lConexao := TConexao.ObterInstancia;
   try
     try
       lConexao.Conexao.StartTransaction;
-// foi resolvido com delete cascade, dexei comentado caso tenha algum restrição em usar
-//      lPedidoProdutoControlador.ExcluirPedidoProdutoPorPedido(pNumeroPedido);
+      lPedidoProdutoControlador.ExcluirPedidoProdutoPorPedido(pNumeroPedido);
       lPedidoRepositorio.Excluir(pNumeroPedido, lConexao);
       lConexao.Conexao.Commit;
     except
@@ -58,11 +56,11 @@ begin
     end;
   finally
     FreeAndNil(lPedidoRepositorio);
-//    FreeAndNil(lPedidoProdutoControlador);
+    FreeAndNil(lPedidoProdutoControlador);
   end;
 end;
 
-procedure TControllerPedido.ObterPedido(pNumeroPedido: integer;
+procedure TPedidoControlador.ObterPedido(pNumeroPedido: integer;
   var pPedido: TPedidoEntidade; pCompleto: boolean = true);
 var
   lPedidoRepositorio : TPedidoRepositorio;
@@ -90,7 +88,7 @@ begin
   end;
 end;
 
-procedure TControllerPedido.Salvar(pPedido: TPedidoEntidade);
+procedure TPedidoControlador.Salvar(pPedido: TPedidoEntidade);
 var
   I: Integer;
   lPedidoProduto: TPedidoProdutoEntidade;
