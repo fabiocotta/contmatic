@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/fabiocotta/contmatic/img/logo_Contmatic.svg" width="150">  
+  <img src="https://github.com/fabiocotta/contmatic/blob/main/img/logo_Contmatic.svg" width="150">  
 </p>
 
 <p align="center">
@@ -34,7 +34,7 @@
 <h1>Model - MER</h1>
 <p>Modelo de entidade relacionamento utlizado usando Mysql Rorkbench 8.0 CE.</p>
 
-<img src="https://github.com/fabiocotta/contmatic/img/model.png">
+<img src=https://github.com/fabiocotta/contmatic/blob/main/img/model.png>
 
 <br> 
 
