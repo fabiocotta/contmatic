@@ -29,10 +29,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPedidos, frmPedidos);
-  Application.CreateForm(TfrmPedidoConsulta, frmPedidoConsulta);
-  Application.CreateForm(TfrmConsultaPadrao, frmConsultaPadrao);
-  Application.CreateForm(TfrmConsultaProduto, frmConsultaProduto);
-  Application.CreateForm(TfrmClienteConsulta, frmClienteConsulta);
   Application.CreateForm(TDMConexao, DMConexao);
   Application.Run;
 end.

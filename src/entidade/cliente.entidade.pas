@@ -13,12 +13,12 @@ type
     FNome: string;
     FCidade: string;
     procedure SetCidade(const Value: string);
-    procedure setCodigo(const Value: Integer);
-    procedure setNome(const Value: string);
+    procedure SetCodigo(const Value: Integer);
+    procedure SetNome(const Value: string);
     procedure SetUf(const Value: string);
   public
-    property Codigo: Integer read FCodigo write setCodigo;
-    property Nome: string read FNome write setNome;
+    property Codigo: Integer read FCodigo write SetCodigo;
+    property Nome: string read FNome write SetNome;
     property Cidade: string read FCidade write SetCidade;
     property Uf: string read FUf write SetUf;
     procedure PopularObjeto(pDataSet: TDataSet);
@@ -26,7 +26,7 @@ type
 
 implementation
 
-{ TCliente }
+{ TClienteEntidade }
 
 procedure TClienteEntidade.PopularObjeto(pDataSet: TDataSet);
 begin

@@ -24,7 +24,7 @@ type
 
 implementation
 
-{ TProdutoDominio }
+{ TProdutoEntidade }
 
 procedure TProdutoEntidade.PopularObjeto(pDataSet: TDataSet);
 begin

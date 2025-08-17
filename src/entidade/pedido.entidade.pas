@@ -33,7 +33,7 @@ type
 
 implementation
 
-{ TPedidoDominio }
+{ TPedidoEntidade }
 
 
 
