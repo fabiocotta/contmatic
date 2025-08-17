@@ -230,6 +230,42 @@ object frmPedidos: TfrmPedidos
         OnDblClick = DBGrid1DblClick
         OnKeyDown = DBGrid1KeyDown
         OnKeyPress = DBGrid1KeyPress
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NUMERO_PEDIDO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_PRODUTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCRICAO_PRODUTO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QUANTIDADE'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_UNITARIO'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VALOR_TOTAL'
+            Visible = True
+          end>
       end
       object Panel3: TPanel
         Left = 0
