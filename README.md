@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/fabiocotta/contmatic/blob/main/img/logo_Contmatic.svg" width="150">  
+  <img src="https://github.com/fabiocotta/contmatic/blob/main/img/logo_contmatic.png" width="150">  
 </p>
 
 <p align="center">
