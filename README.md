@@ -57,7 +57,7 @@
 [BD]
 DriverID=MySQL
 Server=localhost
-Database=WkVenda
+Database=contmatic
 User_Name=root
 Password=suasenha
 Port=3306
