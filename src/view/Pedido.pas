@@ -37,24 +37,13 @@ uses
 
   Util.Conexao,
   Util.Enumerados,
-  midaslib;
+  midaslib, Vcl.Buttons;
 
 
 type
   TfrmPedidos = class(TForm)
-    pnlHeader: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    edtNumeroPedido: TEdit;
-    dtpDataEmissao: TDateTimePicker;
-    edtClienteCodigo: TEdit;
-    btCliente: TButton;
-    edtClienteNome: TEdit;
-    btConsultaPedido: TButton;
-    btCancelarPedido: TButton;
     pcPedidos: TPageControl;
-    TabSheet1: TTabSheet;
+    tbItensPedidos: TTabSheet;
     Panel2: TPanel;
     Label4: TLabel;
     Label5: TLabel;
@@ -66,14 +55,9 @@ type
     edtQuantidade: TEdit;
     btAdicionar: TButton;
     DBGrid1: TDBGrid;
-    Panel3: TPanel;
-    btGravarPedido: TButton;
-    btCancelarOperacao: TButton;
     Panel4: TPanel;
     btRemover: TButton;
     Panel5: TPanel;
-    Label7: TLabel;
-    edtValorTotalPedido: TEdit;
     DsPedidoProduto: TDataSource;
     CdsPedidoProduto: TClientDataSet;
     CdsPedidoProdutoCODIGO: TIntegerField;
@@ -83,6 +67,31 @@ type
     CdsPedidoProdutoQUANTIDADE: TIntegerField;
     CdsPedidoProdutoVALOR_UNITARIO: TCurrencyField;
     CdsPedidoProdutoVALOR_TOTAL: TCurrencyField;
+    pnlHeader: TPanel;
+    Label8: TLabel;
+    pBtExcluir: TPanel;
+    btCancelarPedido: TSpeedButton;
+    pBtinserir: TPanel;
+    btGravarPedido: TSpeedButton;
+    pBusca: TPanel;
+    Panel7: TPanel;
+    btConsultaPedido: TSpeedButton;
+    edtNumeroPedido: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    dtpDataEmissao: TDateTimePicker;
+    pnlInfoCliente: TPanel;
+    GroupBox1: TGroupBox;
+    Label3: TLabel;
+    edtClienteCodigo: TEdit;
+    btCliente: TButton;
+    edtClienteNome: TEdit;
+    Panel1: TPanel;
+    btCancelarOperacao: TButton;
+    pnlValorPedido: TPanel;
+    Label9: TLabel;
+    edtValorTotalPedido: TEdit;
+    Button1: TButton;
     procedure btClienteClick(Sender: TObject);
     procedure edtClienteCodigoExit(Sender: TObject);
     procedure edtClienteCodigoKeyPress(Sender: TObject; var Key: Char);
@@ -102,6 +111,7 @@ type
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CdsPedidoProdutoAfterDelete(DataSet: TDataSet);
+
   private
 
 
@@ -242,14 +252,14 @@ begin
         LimpaCampos;
         lPedidoControlador.ObterPedido(lPedido.NumeroPedido, lPedido);
         if lPedido.NumeroPedido = 0 then
-          MessageDlg('Numero do pedido não encontrado!', TMsgDlgType.mtWarning, [mbOK], 0)
+          MessageDlg('Número do pedido não encontrado!', TMsgDlgType.mtWarning, [mbOK], 0)
         else
           PopularControles(lPedido);
       except
         on E: Exception do
         begin
-          MessageDlg('Erro ao consultar pedido de numero '+lPedido.NumeroPedido.ToString+
-            ' ! mensagem tecnica: '+E.Message, TMsgDlgType.mtError, [mbOK], 0);
+          MessageDlg('Erro ao consultar pedido de número '+lPedido.NumeroPedido.ToString+
+            E.Message, TMsgDlgType.mtError, [mbOK], 0);
         end;
       end;
     end;
@@ -273,8 +283,8 @@ begin
     PopularObjetos(lPedido);
     lPedidoControlador.Salvar(lPedido);
     edtNumeroPedido.Text := lPedido.NumeroPedido.ToString;
-    MessageDlg('Pedido de Numero: '+lPedido.NumeroPedido.ToString+
-      ' salva com sucesso !', TMsgDlgType.mtInformation, [mbOK], 0);
+    MessageDlg('Pedido de Número: '+lPedido.NumeroPedido.ToString+
+      ' salvo com sucesso !', TMsgDlgType.mtInformation, [mbOK], 0);
     LimpaCampos;
   finally
     FreeAndNil(lPedido);
@@ -282,6 +292,8 @@ begin
   end;
 
 end;
+
+
 
 procedure TfrmPedidos.btProdutoClick(Sender: TObject);
 var
@@ -345,7 +357,7 @@ begin
     lClienteControlador.ObterCliente(StrToInt(edtClienteCodigo.Text), lCliente);
     if lCliente.Codigo = 0 then
     begin
-      messageDLG('Codigo do cliente não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
+      messageDLG('Código do cliente não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
       edtClienteCodigo.SetFocus;
     end
     else
@@ -368,7 +380,7 @@ begin
     lProdutoControlador.ObterProduto(StrToInt(edtProdutoCodigo.Text), lProduto);
     if lProduto.Codigo = 0 then
     begin
-      messageDLG('Codigo do produto não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
+      messageDLG('Código do produto não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
       edtProdutoCodigo.SetFocus;
     end
     else
@@ -510,25 +522,25 @@ begin
   Result := True;
   if edtProdutoCodigo.Text = '' then
   begin
-    MessageDlg('Codigo do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    MessageDlg('Código do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
     edtProdutoCodigo.SetFocus;
     Result := false;
   end
   else if edtProdutoDescricao.Text = '' then
   begin
-    MessageDlg('Descricao do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    MessageDlg('Descrição do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
     edtProdutoCodigo.SetFocus;
     Result := false;
   end
   else if edtValorUnitario.Text = '' then
   begin
-    MessageDlg('Valor unitario não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    MessageDlg('Valor únitario não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
     edtValorUnitario.SetFocus;
     Result := false;
   end
   else if edtQuantidade.Text = '' then
   begin
-    MessageDlg('Quantidade não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    MessageDlg('Quantidade não informada! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
     edtQuantidade.SetFocus;
     Result := false;
   end

@@ -1,0 +1,558 @@
+unit Pedido;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ComCtrls,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  System.UITypes,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Datasnap.DBClient,
+  Data.DB,
+
+  controller.pedido,
+  controller.cliente,
+  controller.produto,
+  controller.pedidoproduto,
+
+  pedido.entidade,
+  produto.entidade,
+  cliente.entidade,
+  pedidoproduto.entidade,
+
+  PedidoConsulta,
+  ClienteConsulta,
+  ConsultaProduto,
+
+  Util.Conexao,
+  Util.Enumerados,
+  midaslib;
+
+
+type
+  TfrmPedidos = class(TForm)
+    pnlHeader: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    edtNumeroPedido: TEdit;
+    dtpDataEmissao: TDateTimePicker;
+    edtClienteCodigo: TEdit;
+    btCliente: TButton;
+    edtClienteNome: TEdit;
+    btConsultaPedido: TButton;
+    btCancelarPedido: TButton;
+    pcPedidos: TPageControl;
+    TabSheet1: TTabSheet;
+    Panel2: TPanel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    edtProdutoCodigo: TEdit;
+    btProduto: TButton;
+    edtProdutoDescricao: TEdit;
+    edtValorUnitario: TEdit;
+    edtQuantidade: TEdit;
+    btAdicionar: TButton;
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    btRemover: TButton;
+    Panel5: TPanel;
+    Label7: TLabel;
+    edtValorTotalPedido: TEdit;
+    DsPedidoProduto: TDataSource;
+    CdsPedidoProduto: TClientDataSet;
+    CdsPedidoProdutoCODIGO: TIntegerField;
+    CdsPedidoProdutoNUMERO_PEDIDO: TIntegerField;
+    CdsPedidoProdutoCODIGO_PRODUTO: TIntegerField;
+    CdsPedidoProdutoDESCRICAO_PRODUTO: TStringField;
+    CdsPedidoProdutoQUANTIDADE: TIntegerField;
+    CdsPedidoProdutoVALOR_UNITARIO: TCurrencyField;
+    CdsPedidoProdutoVALOR_TOTAL: TCurrencyField;
+    btGravarPedido: TButton;
+    btCancelarOperacao: TButton;
+    procedure btClienteClick(Sender: TObject);
+    procedure edtClienteCodigoExit(Sender: TObject);
+    procedure edtClienteCodigoKeyPress(Sender: TObject; var Key: Char);
+    procedure edtProdutoCodigoExit(Sender: TObject);
+    procedure btProdutoClick(Sender: TObject);
+    procedure edtValorUnitarioKeyPress(Sender: TObject; var Key: Char);
+    procedure btAdicionarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure CdsPedidoProdutoAfterPost(DataSet: TDataSet);
+    procedure btRemoverClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btGravarPedidoClick(Sender: TObject);
+    procedure btConsultaPedidoClick(Sender: TObject);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
+    procedure btCancelarOperacaoClick(Sender: TObject);
+    procedure btCancelarPedidoClick(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure CdsPedidoProdutoAfterDelete(DataSet: TDataSet);
+  private
+
+
+    { Private declarations }
+    FCodigoPedidoProduto: Integer;
+    procedure CarregarCliente();
+    procedure CarregarProduto();
+    function VerificaCamposPedidoProduto(): boolean;
+    procedure PopularCamposPedidoProduto();
+    procedure InicializaVariaveis();
+    procedure LimpaCamposPedidoProdutos();
+    procedure CalculaValorTotalPedido();
+    procedure PopularObjetos(pPedido: TPedidoEntidade);
+    procedure PopularControles(pPedido: TPedidoEntidade);
+    procedure LimpaCampos();
+    procedure PopularCdsPedidoProduto(); overload;
+    procedure PopularCdsPedidoProduto(pNumeroPedido: Integer;
+      pListaPedidoProduto : TListaPedidoProduto); overload;
+    procedure AlterarItemPedidoProduto();
+
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPedidos: TfrmPedidos;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPedidos.AlterarItemPedidoProduto;
+begin
+  PopularCamposPedidoProduto;
+  CdsPedidoProduto.Edit;
+end;
+
+procedure TfrmPedidos.PopularCamposPedidoProduto;
+begin
+  FCodigoPedidoProduto := CdsPedidoProduto.FieldByName('CODIGO').AsInteger;
+  edtProdutoCodigo.Text := CdsPedidoProduto.FieldByName('CODIGO_PRODUTO').AsString;
+  edtProdutoDescricao.Text := CdsPedidoProduto.FieldByName('DESCRICAO_PRODUTO').AsString;
+  edtQuantidade.Text := CdsPedidoProduto.FieldByName('QUANTIDADE').AsString;
+  edtValorUnitario.Text := CdsPedidoProduto.FieldByName('VALOR_UNITARIO').AsString;
+end;
+
+procedure TfrmPedidos.btAdicionarClick(Sender: TObject);
+begin
+  if VerificaCamposPedidoProduto then
+  begin
+    if CdsPedidoProduto.State = dsBrowse then
+      cdsPedidoProduto.Append;
+    PopularCdsPedidoProduto;
+    cdsPedidoProduto.Post;
+    LimpaCamposPedidoProdutos;
+  end;
+end;
+
+procedure TfrmPedidos.btCancelarOperacaoClick(Sender: TObject);
+begin
+  LimpaCampos;
+end;
+
+procedure TfrmPedidos.btCancelarPedidoClick(Sender: TObject);
+var
+  lFrmPedidoConsulta : TfrmPedidoConsulta;
+  lPedido: TPedidoEntidade;
+  lPedidoControlador: TPedidoControlador;
+
+begin
+  lPedido := TPedidoEntidade.Create;
+  lPedidoControlador := TPedidoControlador.Create;
+  lFrmPedidoConsulta := TfrmPedidoConsulta.Create(self, lPedido, otpExclucao);
+  try
+    if lFrmPedidoConsulta.ShowModal = mrOk then
+    begin
+      try
+        lPedidoControlador.ObterPedido(lPedido.NumeroPedido, lPedido, False);
+        if lPedido.NumeroPedido = 0 then
+          MessageDlg('Numero do pedido não encontrado!', TMsgDlgType.mtWarning, [mbOK], 0)
+        else
+        begin
+          LimpaCampos;
+          lPedidoControlador.Excluir(lPedido.NumeroPedido);
+          MessageDlg('Pedido de numero '+lPedido.NumeroPedido.ToString+
+            ' cancelado com sucesso !', TMsgDlgType.mtInformation, [mbOK], 0);
+        end;
+      except
+        on E: Exception do
+        begin
+          MessageDlg('Erro ao cancelar pedido de numero '+lPedido.NumeroPedido.ToString+
+            ' ! mensagem tecnica: '+E.Message, TMsgDlgType.mtError, [mbOK], 0);
+        end;
+      end;
+    end;
+  finally
+    FreeAndNil(lPedido);
+    FreeAndNil(lPedidoControlador);
+    FreeAndNil(lFrmPedidoConsulta);
+  end;
+end;
+
+procedure TfrmPedidos.btClienteClick(Sender: TObject);
+var
+  lFrmClienteConsulta : TfrmClienteConsulta;
+  lCliente: TClienteEntidade;
+begin
+  lCliente := TClienteEntidade.Create;
+  lFrmClienteConsulta := TfrmClienteConsulta.Create(self, lCliente);
+  try
+    if lFrmClienteConsulta.ShowModal = mrOk then
+    begin
+      edtClienteCodigo.Text := lCliente.Codigo.ToString;
+      edtClienteNome.Text := lCliente.Nome
+    end;
+  finally
+    FreeAndNil(lCliente);
+    FreeAndNil(lFrmClienteConsulta);
+  end;
+
+
+end;
+
+procedure TfrmPedidos.btConsultaPedidoClick(Sender: TObject);
+  var
+  lFrmPedidoConsulta : TfrmPedidoConsulta;
+  lPedido: TPedidoEntidade;
+  lPedidoControlador: TPedidoControlador;
+begin
+  lPedido := TPedidoEntidade.Create;
+  lPedidoControlador := TPedidoControlador.Create;
+  lFrmPedidoConsulta := TfrmPedidoConsulta.Create(self, lPedido, otpConsulta);
+  try
+    if lFrmPedidoConsulta.ShowModal = mrOk then
+    begin
+      try
+        LimpaCampos;
+        lPedidoControlador.ObterPedido(lPedido.NumeroPedido, lPedido);
+        if lPedido.NumeroPedido = 0 then
+          MessageDlg('Numero do pedido não encontrado!', TMsgDlgType.mtWarning, [mbOK], 0)
+        else
+          PopularControles(lPedido);
+      except
+        on E: Exception do
+        begin
+          MessageDlg('Erro ao consultar pedido de numero '+lPedido.NumeroPedido.ToString+
+            ' ! mensagem tecnica: '+E.Message, TMsgDlgType.mtError, [mbOK], 0);
+        end;
+      end;
+    end;
+  finally
+    FreeAndNil(lPedido);
+    FreeAndNil(lPedidoControlador);
+    FreeAndNil(lFrmPedidoConsulta);
+  end;
+
+end;
+
+procedure TfrmPedidos.btGravarPedidoClick(Sender: TObject);
+var
+  lPedidoControlador: TPedidoControlador;
+  lPedido: TPedidoEntidade;
+begin
+  inherited;
+  lPedidoControlador := TPedidoControlador.Create;
+  lPedido := TPedidoEntidade.Create;
+  try
+    PopularObjetos(lPedido);
+    lPedidoControlador.Salvar(lPedido);
+    edtNumeroPedido.Text := lPedido.NumeroPedido.ToString;
+    MessageDlg('Pedido de Numero: '+lPedido.NumeroPedido.ToString+
+      ' salva com sucesso !', TMsgDlgType.mtInformation, [mbOK], 0);
+    LimpaCampos;
+  finally
+    FreeAndNil(lPedido);
+    FreeAndNil(lPedidoControlador);
+  end;
+
+end;
+
+procedure TfrmPedidos.btProdutoClick(Sender: TObject);
+var
+  lFrmConsultaProduto : TfrmConsultaProduto;
+  lProduto: TProdutoEntidade;
+begin
+  lProduto := TProdutoEntidade.Create;
+  lFrmConsultaProduto := TfrmConsultaProduto.Create(self, lProduto);
+  try
+    if lFrmConsultaProduto.ShowModal = mrOk then
+    begin
+      edtProdutoCodigo.Text := lProduto.Codigo.ToString;
+      edtProdutoDescricao.Text := lProduto.Descricao;
+      edtValorUnitario.Text := lProduto.PrecoVenda.ToString;
+    end;
+  finally
+    FreeAndNil(lProduto);
+    FreeAndNil(lFrmConsultaProduto);
+  end;
+
+end;
+
+procedure TfrmPedidos.btRemoverClick(Sender: TObject);
+begin
+   if MessageBox(Handle, 'Deseja excluir o registro?', 'Exclusão', MB_YESNO + MB_ICONQUESTION) = ID_YES then
+    CdsPedidoProduto.Delete;
+end;
+
+procedure TfrmPedidos.CalculaValorTotalPedido;
+var
+  lValorTotal: Currency;
+  lBookMark: TBookMark;
+begin
+  lValorTotal := 0;
+  lBookMark := CdsPedidoProduto.Getbookmark;
+  CdsPedidoProduto.DisableControls;
+  try
+    CdsPedidoProduto.First;
+    while not CdsPedidoProduto.Eof do
+    begin
+      lValorTotal:= lValorTotal + CdsPedidoProduto.FieldByName('VALOR_TOTAL').AsCurrency;
+      CdsPedidoProduto.Next;
+    end;
+    edtValorTotalPedido.Text := CurrToStrF(lValorTotal, ffNumber, 2);
+  finally
+    CdsPedidoProduto.GotoBookmark(lBookMark);
+    CdsPedidoProduto.FreeBookmark(lBookMark);
+    CdsPedidoProduto.EnableControls
+  end;
+end;
+
+procedure TfrmPedidos.CarregarCliente;
+var
+  lClienteControlador: TClienteControlador;
+  lCliente: TClienteEntidade;
+begin
+  inherited;
+  lClienteControlador := TClienteControlador.Create;
+  lCliente := TClienteEntidade.Create;
+  try
+    lClienteControlador.ObterCliente(StrToInt(edtClienteCodigo.Text), lCliente);
+    if lCliente.Codigo = 0 then
+    begin
+      messageDLG('Codigo do cliente não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
+      edtClienteCodigo.SetFocus;
+    end
+    else
+      edtClienteNome.Text := lCliente.Nome;
+  finally
+    FreeAndNil(lClienteControlador);
+    FreeAndNil(lCliente);
+  end;
+end;
+
+procedure TfrmPedidos.CarregarProduto;
+var
+  lProdutoControlador: TProdutoControlador;
+  lProduto: TProdutoEntidade;
+begin
+  inherited;
+  lProdutoControlador := TProdutoControlador.Create;
+  lProduto := TProdutoEntidade.Create;
+  try
+    lProdutoControlador.ObterProduto(StrToInt(edtProdutoCodigo.Text), lProduto);
+    if lProduto.Codigo = 0 then
+    begin
+      messageDLG('Codigo do produto não encontrado!',TMsgDlgType.mtWarning,[mbOK],0);
+      edtProdutoCodigo.SetFocus;
+    end
+    else
+    begin
+      edtProdutoDescricao.Text := lProduto.Descricao;
+      edtValorUnitario.Text := lProduto.PrecoVenda.ToString;
+    end;
+  finally
+    FreeAndNil(lProdutoControlador);
+    FreeAndNil(lProduto);
+  end;
+end;
+
+procedure TfrmPedidos.CdsPedidoProdutoAfterDelete(DataSet: TDataSet);
+begin
+  CalculaValorTotalPedido;
+end;
+
+procedure TfrmPedidos.CdsPedidoProdutoAfterPost(DataSet: TDataSet);
+begin
+  CalculaValorTotalPedido;
+end;
+
+procedure TfrmPedidos.DBGrid1DblClick(Sender: TObject);
+begin
+  AlterarItemPedidoProduto;
+end;
+
+procedure TfrmPedidos.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = VK_DELETE) then
+    btRemoverClick(self);
+end;
+
+procedure TfrmPedidos.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (CharInSet(Key,[#32])) then
+    AlterarItemPedidoProduto;
+end;
+
+procedure TfrmPedidos.edtClienteCodigoExit(Sender: TObject);
+var
+  lFlag : boolean;
+begin
+  lFlag := Trim(edtClienteCodigo.Text) = '';
+  btConsultaPedido.Visible := lFlag;
+  btCancelarPedido.Visible := lFlag;
+  if Trim(edtClienteCodigo.Text) <> '' then
+    CarregarCliente;
+end;
+
+procedure TfrmPedidos.edtClienteCodigoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (CharInSet(Key,['0'..'9',#8, #127])) then
+    key := #0;
+end;
+
+procedure TfrmPedidos.edtProdutoCodigoExit(Sender: TObject);
+begin
+  if Trim(edtProdutoCodigo.Text) <> '' then
+    CarregarProduto;
+end;
+
+procedure TfrmPedidos.edtValorUnitarioKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (CharInSet(Key,['0'..'9',#8, #44, #127])) then
+    key := #0;
+end;
+
+procedure TfrmPedidos.FormShow(Sender: TObject);
+begin
+  InicializaVariaveis;
+  CdsPedidoProduto.Close;
+  CdsPedidoProduto.CreateDataSet;
+  CdsPedidoProduto.Open;
+end;
+
+procedure TfrmPedidos.InicializaVariaveis;
+begin
+  dtpDataEmissao.DateTime := now;
+  FCodigoPedidoProduto := 0;
+  edtNumeroPedido.Text := '0';
+  btConsultaPedido.Visible := True;
+  btCancelarPedido.Visible := True
+end;
+
+procedure TfrmPedidos.LimpaCampos;
+begin
+  InicializaVariaveis;
+  edtClienteCodigo.Text := '';
+  edtClienteNome.Text := '';
+  LimpaCamposPedidoProdutos;
+  CdsPedidoProduto.Close;
+  CdsPedidoProduto.CreateDataSet;
+  edtValorTotalPedido.Text := '';
+end;
+
+procedure TfrmPedidos.LimpaCamposPedidoProdutos;
+begin
+  FCodigoPedidoProduto := 0;
+  edtProdutoCodigo.Text := '';
+  edtProdutoDescricao.Text := '';
+  edtQuantidade.Text := '';
+  edtValorUnitario.Text := '';
+end;
+procedure TfrmPedidos.PopularCdsPedidoProduto(pNumeroPedido: Integer;
+  pListaPedidoProduto: TListaPedidoProduto);
+var
+  I: Integer;
+begin
+  for I := 0 to pListaPedidoProduto.PedidoProdutos.Count-1 do
+  begin
+    CdsPedidoProduto.Append;
+    CdsPedidoProduto.FieldByName('NUMERO_PEDIDO').AsInteger := pNumeroPedido;
+    CdsPedidoProduto.FieldByName('CODIGO').AsInteger := pListaPedidoProduto.PedidoProdutos.Items[I].Codigo;
+    CdsPedidoProduto.FieldByName('CODIGO_PRODUTO').AsInteger := pListaPedidoProduto.PedidoProdutos.Items[I].Produto.Codigo;
+    CdsPedidoProduto.FieldByName('DESCRICAO_PRODUTO').AsString := pListaPedidoProduto.PedidoProdutos.Items[I].Produto.Descricao;
+    CdsPedidoProduto.FieldByName('QUANTIDADE').AsInteger := pListaPedidoProduto.PedidoProdutos.Items[I].Quantidade;
+    CdsPedidoProduto.FieldByName('VALOR_UNITARIO').AsCurrency := pListaPedidoProduto.PedidoProdutos.Items[I].ValorUnitario;
+    CdsPedidoProduto.FieldByName('VALOR_tOTAL').AsCurrency := pListaPedidoProduto.PedidoProdutos.Items[I].ValorTotal;
+    CdsPedidoProduto.Post;
+  end;
+end;
+
+procedure TfrmPedidos.PopularObjetos(pPedido: TPedidoEntidade);
+begin
+  pPedido.NumeroPedido   := StrToInt(edtNumeroPedido.Text);
+  pPedido.DataEmissao    := dtpDataEmissao.DateTime;
+  pPedido.Cliente.Codigo := StrToInt(edtClienteCodigo.Text);
+  pPedido.ListaPedidoProduto.PopularListaPedidoProduto(CdsPedidoProduto);
+  pPedido.ValorTotal     := StrToCurr(StringReplace(edtValorTotalPedido.Text,'.','', [rfReplaceAll]));
+end;
+
+function TfrmPedidos.VerificaCamposPedidoProduto: boolean;
+begin
+  Result := True;
+  if edtProdutoCodigo.Text = '' then
+  begin
+    MessageDlg('Codigo do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    edtProdutoCodigo.SetFocus;
+    Result := false;
+  end
+  else if edtProdutoDescricao.Text = '' then
+  begin
+    MessageDlg('Descricao do produto não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    edtProdutoCodigo.SetFocus;
+    Result := false;
+  end
+  else if edtValorUnitario.Text = '' then
+  begin
+    MessageDlg('Valor unitario não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    edtValorUnitario.SetFocus;
+    Result := false;
+  end
+  else if edtQuantidade.Text = '' then
+  begin
+    MessageDlg('Quantidade não informado! Preencha. ', TMsgDlgType.mtWarning, [mbOK], 0);
+    edtQuantidade.SetFocus;
+    Result := false;
+  end
+end;
+
+procedure TfrmPedidos.PopularCdsPedidoProduto;
+begin
+  CdsPedidoProduto.FieldByName('NUMERO_PEDIDO').AsString     := edtNumeroPedido.Text;
+  CdsPedidoProduto.FieldByName('CODIGO').AsInteger           := FCodigoPedidoProduto;
+  CdsPedidoProduto.FieldByName('CODIGO_PRODUTO').AsString    := edtProdutoCodigo.Text;
+  CdsPedidoProduto.FieldByName('DESCRICAO_PRODUTO').AsString := edtProdutoDescricao.Text;
+  CdsPedidoProduto.FieldByName('QUANTIDADE').AsString        := edtQuantidade.Text;
+  CdsPedidoProduto.FieldByName('VALOR_UNITARIO').AsString    := edtValorUnitario.Text;
+  CdsPedidoProduto.FieldByName('VALOR_TOTAL').AsString       := CurrToStr(
+    (StrToInt(edtQuantidade.Text)*StrToCurr(edtValorUnitario.Text)));
+end;
+
+procedure TfrmPedidos.PopularControles(pPedido: TPedidoEntidade);
+begin
+  edtNumeroPedido.Text    := pPedido.NumeroPedido.ToString;
+  dtpDataEmissao.DateTime := pPedido.DataEmissao;
+  edtClienteCodigo.Text   := pPedido.Cliente.Codigo.ToString;
+  edtClienteNome.Text     := pPedido.Cliente.Nome;
+  PopularCdsPedidoProduto(pPedido.NumeroPedido, pPedido.ListaPedidoProduto);
+end;
+
+end.

@@ -2,8 +2,8 @@ object frmPedidos: TfrmPedidos
   Left = 0
   Top = 0
   Caption = 'contmatic - pedidos'
-  ClientHeight = 532
-  ClientWidth = 904
+  ClientHeight = 644
+  ClientWidth = 1055
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,122 +12,26 @@ object frmPedidos: TfrmPedidos
   Font.Style = []
   Position = poScreenCenter
   TextHeight = 15
-  object pnlHeader: TPanel
-    Left = 0
-    Top = 0
-    Width = 904
-    Height = 97
-    Align = alTop
-    TabOrder = 0
-    DesignSize = (
-      904
-      97)
-    object Label1: TLabel
-      Left = 19
-      Top = 9
-      Width = 101
-      Height = 15
-      Caption = 'Numero do Pedido'
-    end
-    object Label2: TLabel
-      Left = 19
-      Top = 40
-      Width = 70
-      Height = 15
-      Caption = 'Data emiss'#227'o'
-    end
-    object Label3: TLabel
-      Left = 19
-      Top = 69
-      Width = 37
-      Height = 15
-      Caption = 'Cliente'
-    end
-    object edtNumeroPedido: TEdit
-      Left = 126
-      Top = 8
-      Width = 115
-      Height = 23
-      Color = clBtnFace
-      Enabled = False
-      TabOrder = 0
-      OnKeyPress = edtClienteCodigoKeyPress
-    end
-    object dtpDataEmissao: TDateTimePicker
-      Left = 100
-      Top = 37
-      Width = 141
-      Height = 23
-      Date = 45596.000000000000000000
-      Time = 0.940789710650278700
-      TabOrder = 2
-    end
-    object edtClienteCodigo: TEdit
-      Left = 100
-      Top = 66
-      Width = 109
-      Height = 23
-      TabOrder = 3
-      OnExit = edtClienteCodigoExit
-      OnKeyPress = edtClienteCodigoKeyPress
-    end
-    object btCliente: TButton
-      Left = 209
-      Top = 66
-      Width = 33
-      Height = 25
-      Caption = '...'
-      TabOrder = 4
-      OnClick = btClienteClick
-    end
-    object edtClienteNome: TEdit
-      Left = 243
-      Top = 66
-      Width = 646
-      Height = 23
-      Anchors = [akLeft, akTop, akRight]
-      Color = clBtnFace
-      Enabled = False
-      TabOrder = 5
-    end
-    object btConsultaPedido: TButton
-      Left = 640
-      Top = 5
-      Width = 121
-      Height = 25
-      Caption = 'Consultar Pedido'
-      TabOrder = 1
-      OnClick = btConsultaPedidoClick
-    end
-    object btCancelarPedido: TButton
-      Left = 767
-      Top = 5
-      Width = 121
-      Height = 25
-      Caption = 'Cancelar Pedido'
-      TabOrder = 6
-      OnClick = btCancelarPedidoClick
-    end
-  end
   object pcPedidos: TPageControl
     Left = 0
-    Top = 97
-    Width = 904
-    Height = 435
-    ActivePage = TabSheet1
-    Align = alClient
-    TabOrder = 1
-    object TabSheet1: TTabSheet
+    Top = 176
+    Width = 1055
+    Height = 401
+    ActivePage = tbItensPedidos
+    Align = alTop
+    TabOrder = 0
+    object tbItensPedidos: TTabSheet
       Caption = 'Itens do Pedido'
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 896
+        Width = 1047
         Height = 52
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 896
         DesignSize = (
-          896
+          1047
           52)
         object Label4: TLabel
           Left = 10
@@ -137,7 +41,7 @@ object frmPedidos: TfrmPedidos
           Caption = 'Produto'
         end
         object Label5: TLabel
-          Left = 513
+          Left = 664
           Top = 15
           Width = 71
           Height = 15
@@ -146,7 +50,7 @@ object frmPedidos: TfrmPedidos
           ExplicitLeft = 412
         end
         object Label6: TLabel
-          Left = 677
+          Left = 828
           Top = 15
           Width = 62
           Height = 15
@@ -173,9 +77,9 @@ object frmPedidos: TfrmPedidos
           OnClick = btProdutoClick
         end
         object edtProdutoDescricao: TEdit
-          Left = 161
+          Left = 167
           Top = 12
-          Width = 342
+          Width = 493
           Height = 23
           Anchors = [akLeft, akTop, akRight]
           Color = clBtnFace
@@ -183,25 +87,27 @@ object frmPedidos: TfrmPedidos
           TabOrder = 2
         end
         object edtValorUnitario: TEdit
-          Left = 588
+          Left = 739
           Top = 12
           Width = 81
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 3
           OnKeyPress = edtValorUnitarioKeyPress
+          ExplicitLeft = 588
         end
         object edtQuantidade: TEdit
-          Left = 745
+          Left = 896
           Top = 12
           Width = 48
           Height = 23
           Anchors = [akTop, akRight]
           TabOrder = 4
           OnKeyPress = edtClienteCodigoKeyPress
+          ExplicitLeft = 745
         end
         object btAdicionar: TButton
-          Left = 810
+          Left = 961
           Top = 11
           Width = 75
           Height = 25
@@ -211,13 +117,14 @@ object frmPedidos: TfrmPedidos
           ParentDoubleBuffered = False
           TabOrder = 5
           OnClick = btAdicionarClick
+          ExplicitLeft = 810
         end
       end
       object DBGrid1: TDBGrid
         Left = 0
         Top = 52
-        Width = 798
-        Height = 279
+        Width = 949
+        Height = 262
         Align = alClient
         DataSource = DsPedidoProduto
         ReadOnly = True
@@ -231,42 +138,18 @@ object frmPedidos: TfrmPedidos
         OnKeyDown = DBGrid1KeyDown
         OnKeyPress = DBGrid1KeyPress
       end
-      object Panel3: TPanel
-        Left = 0
-        Top = 364
-        Width = 896
-        Height = 41
-        Align = alBottom
-        TabOrder = 2
-        object btGravarPedido: TButton
-          Left = 224
-          Top = 6
-          Width = 121
-          Height = 25
-          Caption = 'Gravar Pedido'
-          TabOrder = 0
-          OnClick = btGravarPedidoClick
-        end
-        object btCancelarOperacao: TButton
-          Left = 368
-          Top = 6
-          Width = 121
-          Height = 25
-          Caption = 'Cancelar Opera'#231#227'o'
-          TabOrder = 1
-          OnClick = btCancelarOperacaoClick
-        end
-      end
       object Panel4: TPanel
-        Left = 798
+        Left = 949
         Top = 52
         Width = 98
-        Height = 279
+        Height = 262
         Align = alRight
-        TabOrder = 3
+        TabOrder = 2
+        ExplicitLeft = 798
+        ExplicitHeight = 298
         DesignSize = (
           98
-          279)
+          262)
         object btRemover: TButton
           Left = 15
           Top = 6
@@ -282,49 +165,368 @@ object frmPedidos: TfrmPedidos
       end
       object Panel5: TPanel
         Left = 0
-        Top = 331
-        Width = 896
-        Height = 33
+        Top = 314
+        Width = 1047
+        Height = 57
         Align = alBottom
-        TabOrder = 4
-        DesignSize = (
-          896
-          33)
-        object Label7: TLabel
-          Left = 669
-          Top = 11
-          Width = 115
-          Height = 15
-          Anchors = [akTop, akRight]
-          Caption = 'Valor Total do Pedido:'
-          ExplicitLeft = 568
-        end
-        object edtValorTotalPedido: TEdit
-          Left = 798
-          Top = 5
-          Width = 96
-          Height = 23
-          Anchors = [akTop, akRight]
-          Color = clBtnFace
-          Enabled = False
+        Color = 16051947
+        ParentBackground = False
+        TabOrder = 3
+        ExplicitTop = 288
+        object pnlValorPedido: TPanel
+          Left = 712
+          Top = 1
+          Width = 334
+          Height = 55
+          Align = alRight
+          BevelOuter = bvNone
+          Color = 16051947
+          ParentBackground = False
           TabOrder = 0
-          OnKeyPress = edtValorUnitarioKeyPress
+          ExplicitHeight = 81
+          DesignSize = (
+            334
+            55)
+          object Label9: TLabel
+            AlignWithMargins = True
+            Left = 10
+            Top = 0
+            Width = 177
+            Height = 55
+            Margins.Left = 10
+            Margins.Top = 0
+            Margins.Right = 0
+            Margins.Bottom = 0
+            Align = alLeft
+            AutoSize = False
+            Caption = 'Valor Total:'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = 5585461
+            Font.Height = -29
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+            ExplicitLeft = 8
+            ExplicitTop = 1
+            ExplicitHeight = 73
+          end
+          object edtValorTotalPedido: TEdit
+            Left = 174
+            Top = 10
+            Width = 147
+            Height = 38
+            Anchors = [akTop, akRight]
+            Color = clBtnFace
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBrown
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            OnKeyPress = edtValorUnitarioKeyPress
+          end
         end
       end
     end
   end
+  object pnlHeader: TPanel
+    Left = 0
+    Top = 0
+    Width = 1055
+    Height = 80
+    Margins.Left = 0
+    Margins.Top = 0
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 16051947
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitTop = 193
+    object Label8: TLabel
+      AlignWithMargins = True
+      Left = 10
+      Top = 0
+      Width = 177
+      Height = 80
+      Margins.Left = 10
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      AutoSize = False
+      Caption = 'Pedidos'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5585461
+      Font.Height = -29
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Layout = tlCenter
+      ExplicitLeft = 0
+      ExplicitHeight = 50
+    end
+    object pBtExcluir: TPanel
+      AlignWithMargins = True
+      Left = 940
+      Top = 20
+      Width = 110
+      Height = 40
+      Margins.Left = 0
+      Margins.Top = 20
+      Margins.Right = 5
+      Margins.Bottom = 20
+      Align = alRight
+      BevelOuter = bvNone
+      Color = 6906591
+      ParentBackground = False
+      TabOrder = 0
+      ExplicitLeft = 728
+      ExplicitHeight = 39
+      object btCancelarPedido: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 110
+        Height = 40
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'Cancelar'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        OnClick = btCancelarPedidoClick
+        ExplicitLeft = 72
+        ExplicitTop = 8
+        ExplicitWidth = 23
+        ExplicitHeight = 22
+      end
+    end
+    object pBtinserir: TPanel
+      AlignWithMargins = True
+      Left = 815
+      Top = 20
+      Width = 110
+      Height = 40
+      Margins.Left = 0
+      Margins.Top = 20
+      Margins.Right = 15
+      Margins.Bottom = 20
+      Align = alRight
+      BevelOuter = bvNone
+      Color = 16475988
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = 478
+      ExplicitHeight = 39
+      object btGravarPedido: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 110
+        Height = 40
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'Gravar'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        OnClick = btGravarPedidoClick
+        ExplicitLeft = -32
+      end
+    end
+    object pBusca: TPanel
+      Left = 187
+      Top = 0
+      Width = 628
+      Height = 80
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 80
+      Margins.Bottom = 0
+      Align = alClient
+      BevelOuter = bvNone
+      Color = 16051947
+      ParentBackground = False
+      TabOrder = 2
+      object Label1: TLabel
+        Left = 53
+        Top = 17
+        Width = 54
+        Height = 15
+        Caption = 'N'#186' Pedido'
+      end
+      object Label2: TLabel
+        Left = 37
+        Top = 49
+        Width = 70
+        Height = 15
+        Caption = 'Data Emiss'#227'o'
+      end
+      object Panel7: TPanel
+        AlignWithMargins = True
+        Left = 249
+        Top = 20
+        Width = 110
+        Height = 40
+        Margins.Left = 0
+        Margins.Top = 20
+        Margins.Right = 15
+        Margins.Bottom = 20
+        Align = alRight
+        BevelOuter = bvNone
+        Color = 16475988
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitLeft = 166
+        ExplicitHeight = 39
+        object btConsultaPedido: TSpeedButton
+          Left = 0
+          Top = 0
+          Width = 110
+          Height = 40
+          Cursor = crHandPoint
+          Align = alClient
+          Caption = 'Consultar'
+          Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -19
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+          OnClick = btConsultaPedidoClick
+          ExplicitLeft = 72
+          ExplicitTop = 8
+          ExplicitWidth = 23
+          ExplicitHeight = 22
+        end
+      end
+      object edtNumeroPedido: TEdit
+        Left = 113
+        Top = 14
+        Width = 115
+        Height = 23
+        Color = clBtnFace
+        Enabled = False
+        TabOrder = 1
+        OnKeyPress = edtClienteCodigoKeyPress
+      end
+      object dtpDataEmissao: TDateTimePicker
+        Left = 113
+        Top = 43
+        Width = 115
+        Height = 23
+        Date = 45596.000000000000000000
+        Time = 0.940789710650278700
+        TabOrder = 2
+      end
+    end
+  end
+  object pnlInfoCliente: TPanel
+    Left = 0
+    Top = 80
+    Width = 1055
+    Height = 96
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitTop = 273
+    object GroupBox1: TGroupBox
+      Left = 10
+      Top = 3
+      Width = 1045
+      Height = 78
+      Caption = ' Dados do Cliente '
+      TabOrder = 0
+      DesignSize = (
+        1045
+        78)
+      object Label3: TLabel
+        Left = 28
+        Top = 34
+        Width = 37
+        Height = 15
+        Caption = 'Cliente'
+      end
+      object edtClienteCodigo: TEdit
+        Left = 71
+        Top = 34
+        Width = 109
+        Height = 23
+        TabOrder = 0
+        OnExit = edtClienteCodigoExit
+        OnKeyPress = edtClienteCodigoKeyPress
+      end
+      object btCliente: TButton
+        Left = 186
+        Top = 34
+        Width = 33
+        Height = 23
+        Caption = '...'
+        TabOrder = 1
+        OnClick = btClienteClick
+      end
+      object edtClienteNome: TEdit
+        Left = 225
+        Top = 34
+        Width = 786
+        Height = 23
+        Anchors = [akLeft, akTop, akRight]
+        Color = clBtnFace
+        Enabled = False
+        TabOrder = 2
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 583
+    Width = 1055
+    Height = 61
+    Align = alBottom
+    TabOrder = 3
+    object btCancelarOperacao: TButton
+      Left = 819
+      Top = 8
+      Width = 111
+      Height = 47
+      Caption = 'Cancelar Opera'#231#227'o'
+      TabOrder = 0
+      OnClick = btCancelarOperacaoClick
+    end
+    object Button1: TButton
+      Left = 936
+      Top = 8
+      Width = 111
+      Height = 47
+      Caption = 'Sair'
+      TabOrder = 1
+      OnClick = btCancelarOperacaoClick
+    end
+  end
   object DsPedidoProduto: TDataSource
     DataSet = CdsPedidoProduto
-    Left = 620
-    Top = 187
+    Left = 1004
+    Top = 203
   end
   object CdsPedidoProduto: TClientDataSet
     Aggregates = <>
     Params = <>
     AfterPost = CdsPedidoProdutoAfterPost
     AfterDelete = CdsPedidoProdutoAfterDelete
-    Left = 620
-    Top = 243
+    Left = 1004
+    Top = 259
     object CdsPedidoProdutoCODIGO: TIntegerField
       DisplayLabel = 'Codigo'
       FieldName = 'CODIGO'
